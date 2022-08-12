@@ -1,7 +1,19 @@
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
 namespace PierreTreats.Models
 {
   public class Treat
   {
-    // properties, constructors, methods, etc. go here
+    public Treat()
+    {
+      this.TreatFlavors = new HashSet<TreatFlavor>();
+    }
+    
+    public int TreatId { get; set; }
+    [Required]
+    public string Name { get; set; }
+    public virtual ICollection<TreatFlavor> TreatFlavors { get;}
   }
 }
