@@ -3,3 +3,66 @@
 }
 
 @model PierreTreats.Models.Flavor;
+
+<div class="jumbotron text-center">
+  <h2>Details of @Html.DisplayFor(model => model.Name)</h2>
+</div>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          @Html.ActionLink("Home", "Index", "Home", null, new { @class="nav-link" })
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Treats
+          </a>
+          <ul class="dropdown-menu">
+            <li>@Html.ActionLink("All Treats", "Index", "Treats", null, new { @class="dropdown-item" })</li>
+            <li>@Html.ActionLink("New Treat", "Create", "Treats", null, new { @class="dropdown-item" })</li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Flavors
+          </a>
+          <ul class="dropdown-menu">
+            <li>@Html.ActionLink("All Flavors", "Index", "Flavors", null, new { @class="dropdown-item" })</li>
+            <li>@Html.ActionLink("New Flavor", "Create", "Flavors", null, new { @class="dropdown-item" })</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<hr />
+<div>
+  @if(Model.TreatFlavors.Count == 0)
+  {
+    <h4>@Html.DisplayFor(model => model.Name) is Not assigned to a treat</h4>
+  }
+  else
+  {
+    <h4>@Html.LabelFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
+    <h5>Add Treat:</h5>
+    @foreach(var join in Model.TreatFlavors)
+    {
+      @using (Html.BeginForm("DeleteTreat", "Flavors"))
+      {
+        @Html.Hidden("joinId", @join.TreatFlavorId)
+        <li>
+          @join.Treat.Name  
+          <button type="submit" class="btn btn-outline-danger">Delete</button>
+        </li>
+      }
+    }
+  }
+</div>
+<div class="mt-5">
+  <div class="btn-group btn-group" role="group" aria-label="Default button group">
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Assign Treat", "AddTreat", new { id = Model.FlavorId })</button>
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Update Flavor", "Edit", new { id = Model.FlavorId})</button>
+    <button type="button" class="btn btn-outline-danger">@Html.ActionLink("Remove Flavor", "Delete", new { id = Model.FlavorId})</button>
+  </div>
+</div>
