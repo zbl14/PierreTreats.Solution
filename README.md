@@ -1,65 +1,75 @@
-# {C# Application Name}
-
 #### By _**Zhibin Liang**_  
 
-#### _{Brief description of application}_  
+#### A solution for Pierre's Sweet & Savory Treats to manage treats and flavors
 
 ---
 ## Technologies Used
 
-* _C#_
-* _.NET_
-* _HTML_
-* _CSS_
+* C#
+* HTML/CSS
+* MySQL
+* ASP.NET CORE
 
 ---
 ## Description
 
-_{This is a detailed description of your application. Give as much detail as needed to explain what the application does as well as any other information you want users or other developers to have.}_
+Pierre's Sweet & Savory Treats has full CRUD behavior for authorized users(anyone signed in), and read only capabilities for anonymous users.
 
 ---
 ## Setup/Installation Requirements
 
 <details>
 <summary><strong>To Setup</strong></summary>
-<li>Install <em>Microsoft .NET SDK<em></li>
-<li>Clone the repo
 
-```
-$ git clone
-```
-</li>
+* Requires _MySQL_ for the database
+* Install _Microsoft .NET SDK_
+* Clone the repo
+    ```
+    $ git clone https://github.com/zbl14/PierreTreats.Solution.git
+    ```
 </details>
 
 <details>
 <summary><strong>To Run</strong></summary>
-Navigate to  
-   <pre>ProjectName.Solution
-   ├── <strong>ProjectName</strong>
-   └── ProjectName.Tests</pre>
 
-```
-$ dotnet restore
-```
-```
-$ dotnet run
-```
+* Navigate to  
+   <pre>PierreTreats.Solution
+   ├── <strong>PierreTreats</strong>
+   └── PierreTreats.Tests</pre>
+* Create ```appsettings.json``` in the directory of _PierreTreats_, and add following to the file with your MySQL username and password
+    ```
+    {
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=localhost;Port=3306;database=zhibin_liang;uid=[username];pwd=[password];"
+    }
+    }
+    ```
+* Run follwing commands
+    ```
+    $ dotnet restore
+    ```
+    ```
+    $ dotnet ef database update
+    ```
+    ```
+    $ dotnet run
+    ```
 </details>
 
 <details>
 <summary><strong>For Testing</strong></summary>
-Navigate to  
-    <pre>ProjectName.Solution
-    ├── ProjectName
-    └── <strong>ProjectName.Tests</strong></pre>
 
-```
-$ dotnet restore
-```
-```
-$ dotnet test
-```
+* Navigate to  
+    <pre>PierreTreats.Solution
+    ├── PierreTreats
+    └── <strong>PierreTreats.Tests</strong></pre>
 
+    ```
+    $ dotnet restore
+    ```
+    ```
+    $ dotnet test
+    ```
 </details>
 <br/>
 
@@ -68,11 +78,10 @@ This program was built using *`Microsoft .NET SDK 5.0.401`*, and may not be comp
 ---
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+* No known bugs, feel free to contact me here if any are found.
 
 ## License
-MIT
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Contact Information
 Zhibin Liang <ifthereisoneday@gmail.com>
