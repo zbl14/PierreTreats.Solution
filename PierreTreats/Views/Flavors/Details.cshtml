@@ -45,7 +45,7 @@
   else
   {
     <h4>@Html.LabelFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h4>
-    <h5>Add Treat:</h5>
+    <h5>Treats has the same flavor:</h5>
     @foreach(var join in Model.TreatFlavors)
     {
       @using (Html.BeginForm("DeleteTreat", "Flavors"))
