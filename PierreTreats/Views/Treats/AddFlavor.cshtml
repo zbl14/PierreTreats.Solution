@@ -2,11 +2,10 @@
   Layout = "_Layout";
 }
 
-@using PierreTreats.Models;
-@model IEnumerable<PierreTreats.Models.Treat>
+@model PierreTreats.Models.Treat;
 
 <div class="jumbotron text-center">
-  <h2>Treat List</h2>
+  <h2>Assign a Flavor</h2>
 </div>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -34,37 +33,22 @@
           </ul>
         </li>
       </ul>
-      <div>
-        @using (Html.BeginForm("Index","Treats",FormMethod.Get))
-        { 
-          <div class="d-flex" role="search">
-            @Html.TextBox("SearchString", null, new { type="search", placeholder = "Search", @class="form-control me-2"}) 
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </div>
-        }
-      </div>
     </div>
   </div>
 </nav>
 <hr />
-<div>
-  @if (Model.Any())
-  {
-    <ul>
-      @foreach(Treat treat in Model)
-      {
-        <li>
-          <div class="row mb-2">
-            <div class="col-sm-3">
-              @Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId }) 
-            </div>
-          </div>
-        </li> 
-      }
-    </ul>
-  }
-  else
-  {
-    <h3>No treats have been added.</h3>
-  }
-</div>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TreatId)
+  <div class="form-group row mb-3">
+    @Html.Label("Select Flavor", null, new { @class="col-form-label col-md-2"})
+    <div class="col-md-6">
+      @Html.DropDownList("FlavorId", null, new { @class="form-control" })
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-6 offset-md-2">   
+      <button type="submit" class="btn btn-outline-dark">Update</button>
+    </div>
+  </div>
+}
