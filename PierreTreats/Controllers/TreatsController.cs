@@ -11,15 +11,19 @@ using System.Security.Claims;
 
 namespace PierreTreats.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly PierreTreatsContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public TreatsController(PierreTreatsContext db)
+    public TreatsController(UserManager<ApplicationUser> userManager, PierreTreatsContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
+    [AllowAnonymous]
     public ActionResult Index(string searchString)
     {
       ViewBag.PageTitle = "All Treats";
@@ -47,13 +51,17 @@ namespace PierreTreats.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Treat treat)
+    public async Task<ActionResult> Create(Treat treat)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      treat.User = currentUser;
       _db.Treats.Add(treat);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisTreat = _db.Treats
