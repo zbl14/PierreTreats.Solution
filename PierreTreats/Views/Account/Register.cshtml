@@ -8,6 +8,17 @@
 <div class="jumbotron text-center">
   <h2>Register a new user</h2>
 </div>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          @Html.ActionLink("Home", "Index", "Home", null, new { @class="nav-link" })
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <hr />
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {

@@ -5,6 +5,29 @@
 <div class="jumbotron text-center">
   <h2>Authentication with Identity</h2>
 </div>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          @Html.ActionLink("Home", "Index", "Home", null, new { @class="nav-link" })
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <hr />
-<p>@Html.ActionLink("Register", "Register")</p>
+@if (User.Identity.IsAuthenticated)
+{
+  <p>Hello @User.Identity.Name!</p>
+  @using (Html.BeginForm("Logoff", "Account"))
+  {
+    <input type="submit" class="btn btn-default" value="Log out" />
+  }
+}
+else
+{
+  <p>@Html.ActionLink("Register", "Register")</p>
+  <p>@Html.ActionLink("Log in", "Login")</p>
+}
 
